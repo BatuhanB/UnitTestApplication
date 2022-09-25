@@ -1,0 +1,12 @@
+C:\Users\balib\source\repos\UnitTestApplication\UnitTestApplication\bin\Debug\net6.0\UnitTestApplication.deps.json
+C:\Users\balib\source\repos\UnitTestApplication\UnitTestApplication\bin\Debug\net6.0\UnitTestApplication.dll
+C:\Users\balib\source\repos\UnitTestApplication\UnitTestApplication\bin\Debug\net6.0\UnitTestApplication.pdb
+C:\Users\balib\source\repos\UnitTestApplication\UnitTestApplication\obj\Debug\net6.0\UnitTestApplication.csproj.AssemblyReference.cache
+C:\Users\balib\source\repos\UnitTestApplication\UnitTestApplication\obj\Debug\net6.0\UnitTestApplication.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\balib\source\repos\UnitTestApplication\UnitTestApplication\obj\Debug\net6.0\UnitTestApplication.AssemblyInfoInputs.cache
+C:\Users\balib\source\repos\UnitTestApplication\UnitTestApplication\obj\Debug\net6.0\UnitTestApplication.AssemblyInfo.cs
+C:\Users\balib\source\repos\UnitTestApplication\UnitTestApplication\obj\Debug\net6.0\UnitTestApplication.csproj.CoreCompileInputs.cache
+C:\Users\balib\source\repos\UnitTestApplication\UnitTestApplication\obj\Debug\net6.0\UnitTestApplication.dll
+C:\Users\balib\source\repos\UnitTestApplication\UnitTestApplication\obj\Debug\net6.0\refint\UnitTestApplication.dll
+C:\Users\balib\source\repos\UnitTestApplication\UnitTestApplication\obj\Debug\net6.0\UnitTestApplication.pdb
+C:\Users\balib\source\repos\UnitTestApplication\UnitTestApplication\obj\Debug\net6.0\ref\UnitTestApplication.dll
