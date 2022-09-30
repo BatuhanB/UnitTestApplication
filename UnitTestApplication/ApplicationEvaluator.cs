@@ -8,11 +8,11 @@ namespace UnitTestApplication
         private const int minAge = 18;
         private const int autoAcceptedYearsOfExperience = 15;
         private List<string> techStackList = new() { "C#", "RabbitMQ", "Micro service", "Visual Studio" };
-        private IdentityValidator _identityValidator;
+        private readonly IIdentityValidator? identityValidator;
 
-        public ApplicationEvaluator()
+        public ApplicationEvaluator(IIdentityValidator? validator)
         {
-            _identityValidator = new IdentityValidator();
+            this.identityValidator = validator;
         }
 
         public ApplicationResult Evaluate(JobApplication application)
@@ -20,7 +20,7 @@ namespace UnitTestApplication
             if (application.Applicant.Age < minAge)
                 return ApplicationResult.AutoRejected;
 
-            var validIdentity = _identityValidator.IsValid(application.Applicant.IdentityNumber);
+            var validIdentity = identityValidator.IsValid(application.Applicant.IdentityNumber);
             if (!validIdentity)
                 return ApplicationResult.TransferredToHr;
 

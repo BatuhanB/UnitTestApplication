@@ -1,4 +1,6 @@
 using UnitTestApplication.Models;
+using Moq;
+using UnitTestApplication.Services;
 
 namespace UnitTestApplication.UnitTest
 {
@@ -9,7 +11,7 @@ namespace UnitTestApplication.UnitTest
         public void Application_WithUnderAge_TransferredToAutoRejected()
         {
             // Arrange
-            var evaluator = new ApplicationEvaluator();
+            var evaluator = new ApplicationEvaluator(null);
             var application = new JobApplication()
             {
                 Applicant = new Applicant()
@@ -29,15 +31,18 @@ namespace UnitTestApplication.UnitTest
         [Test]
         public void Application_WithNoTechStack_TransferredToAutoRejected()
         {
+            var mockValidator = new Mock<IIdentityValidator>();
+            mockValidator.Setup(x => 
+                x.IsValid(It.IsAny<string>())).Returns(true);
             // Arrange
-            var evaluator = new ApplicationEvaluator();
+            var evaluator = new ApplicationEvaluator(mockValidator.Object);
             var application = new JobApplication
             {
                 Applicant = new Applicant
                 {
                     Age = 19,
                 },
-                TechStackList = new List<string>{""},
+                TechStackList = new List<string> { "" },
             };
 
             //Action
@@ -52,14 +57,18 @@ namespace UnitTestApplication.UnitTest
         public void Application_WithTechStackOver75_TransferredToAutoAccepted()
         {
             // Arrange
-            var evaluator = new ApplicationEvaluator();
+            var mockValidator = new Mock<IIdentityValidator>();
+            mockValidator.Setup(x => 
+                x.IsValid(It.IsAny<string>())).Returns(true);
+            // Arrange
+            var evaluator = new ApplicationEvaluator(mockValidator.Object);
             var application = new JobApplication
             {
                 Applicant = new Applicant
                 {
                     Age = 19,
                 },
-                TechStackList = new List<string>{"C#", "RabbitMQ", "Micro service", "Visual Studio"},
+                TechStackList = new List<string> { "C#", "RabbitMQ", "Micro service", "Visual Studio" },
                 YearsOfExperience = 15,
             };
 
@@ -71,21 +80,28 @@ namespace UnitTestApplication.UnitTest
         }
 
         //UnitOfWork_Condition_ExpectedResult
-        //[Test]
-        //public void Application_WithIdentityNumberNotValid_TransferredToAutoAccepted()
-        //{
-        //    // Arrange
-        //    var evaluator = new ApplicationEvaluator();
-        //    var application = new JobApplication
-        //    {
-        //        Applicant = new Applicant(),
-        //    };
+        [Test]
+        public void Application_WithIdentityNumberNotValid_TransferredToHr()
+        {
+            // Arrange
+            var mockValidator = new Mock<IIdentityValidator>();
+            mockValidator.Setup(x => 
+                x.IsValid(It.IsAny<string>())).Returns(false);
+            // Arrange
+            var evaluator = new ApplicationEvaluator(mockValidator.Object);
+            var application = new JobApplication
+            {
+                Applicant = new Applicant
+                {
+                    Age = 19,
+                },
+            };
 
-        //    //Action
-        //    var result = evaluator.Evaluate(application);
+            //Action
+            var result = evaluator.Evaluate(application);
 
-        //    //Assert
-        //    Assert.That(result, Is.EqualTo(ApplicationResult.AutoAccepted));
-        //}
+            //Assert
+            Assert.That(result, Is.EqualTo(ApplicationResult.TransferredToHr));
+        }
     }
 }
